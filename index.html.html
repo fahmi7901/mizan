@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confession Website</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap');
+
+        /* Body Styling */
+        body {
+            font-family: 'Comic Neue', cursive;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #ff9a8b, #f7ff00);
+            animation: gradientBG 5s ease infinite;
+            background-size: 400% 400%;
+            box-sizing: border-box;
+            overflow: hidden;
+            position: relative;
+            background-image: url('https://www.transparenttextures.com/patterns/diamond.png');
+            background-repeat: repeat;
+            background-position: top left;
+        }
+
+        /* Keyframes for gradient animation */
+        @keyframes gradientBG {
+            0% { background: linear-gradient(135deg, #ff9a8b, #f7ff00); }
+            50% { background: linear-gradient(135deg, #ff6b6b, #ffcd99); }
+            100% { background: linear-gradient(135deg, #ff9a8b, #f7ff00); }
+        }
+
+        /* Snowflakes Animation */
+        @keyframes snowflakes {
+            0% { top: -10%; opacity: 1; }
+            100% { top: 100%; opacity: 0; }
+        }
+
+        .snowdrop {
+            position: absolute;
+            top: -10%;
+            width: 10px;
+            height: 10px;
+            background-color: white;
+            border-radius: 50%;
+            animation: snowflakes 10s linear infinite;
+            animation-delay: calc(-10s * var(--i));
+        }
+
+        .snowdrop:nth-child(odd) {
+            animation-duration: 12s;
+        }
+
+        .snowdrop:nth-child(even) {
+            animation-duration: 8s;
+        }
+
+        /* Container Styling */
+        .container {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            box-sizing: border-box;
+            position: relative;
+            z-index: 1;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        /* Keyframes for fade-in effect */
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        /* Button Styling */
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            margin: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+        }
+
+        .yes-btn {
+            background-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .no-btn {
+            background-color: #ff4c4c;
+            color: white;
+            font-weight: bold;
+            position: absolute;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Gif and Image Styling */
+        .gif {
+            width: 200px;
+            margin: 20px auto;
+            display: block;
+            border-radius: 10px;
+        }
+
+        .bouquet {
+            width: 300px;
+            margin-top: 20px;
+        }
+
+        /* Header Styling */
+        h1 {
+            color: #ff6f61;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        p {
+            color: #ff8c00;
+            font-size: 1.2em;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            button {
+                width: 90%;
+                font-size: 16px;
+                padding: 12px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            p {
+                font-size: 1em;
+            }
+
+            .gif {
+                width: 150px;
+            }
+
+            .bouquet {
+                width: 250px;
+            }
+        }
+
+        /* Very small screens */
+        @media (max-width: 480px) {
+            body {
+                font-size: 14px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .gif {
+                width: 120px;
+            }
+
+            .bouquet {
+                width: 220px;
+            }
+        }
+    </style>
+    <script>
+        function nextPage(contentId) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.style.display = 'none');
+            document.body.className = contentId;
+            document.getElementById(contentId).style.display = 'block';
+        }
+
+        function handleNoButton() {
+            const noButton = document.getElementById('noButton');
+            noButton.style.top = Math.random() * 80 + 'vh';
+            noButton.style.left = Math.random() * 80 + 'vw';
+        }
+
+        function handleYesButton() {
+            nextPage('page4');
+        }
+
+        function createSnowflakes() {
+            const numberOfSnowflakes = 50;
+            for (let i = 0; i < numberOfSnowflakes; i++) {
+                let snowflake = document.createElement('div');
+                snowflake.classList.add('snowdrop');
+                snowflake.style.left = Math.random() * 100 + 'vw';
+                snowflake.style.animationDelay = `${Math.random() * 10}s`;
+                snowflake.style.setProperty('--i', i);
+                document.body.appendChild(snowflake);
+            }
+        }
+
+        window.onload = function() {
+            createSnowflakes();
+            document.getElementById('pianoAudio').play();
+        }
+    </script>
+</head>
+<body class="page0">
+
+    <!-- Audio Background: Romantic Piano Sound -->
+    <audio id="pianoAudio" loop>
+        <source src="your-piano-track.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- First Page: Intro -->
+    <div id="page0" class="page container">
+        <h1>Hi Mizannnn!</h1>
+        <img class="gif" src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExc2FsYWhheDNnYWl3MGxsbzA4YnkyZ2E1MDA2Nzcxc2xndDdmaTloZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/hqgD6bocRHhEjamBPA/giphy.webp" alt="Cute Hug GIF">
+        <button onclick="nextPage('page1')">Next</button>
+    </div>
+
+    <!-- Other Pages -->
+    <div id="page1" class="page container" style="display: none;">
+        <h1>I want to tell you something...</h1>
+        <img class="gif" src="https://media.giphy.com/media/3o7abKhOpu0NwenH3O/giphy.gif" alt="Excited GIF">
+        <img class="gif" src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExaGdhbXk1a2JqNmw4M2JrYmZxcmo1cGhpM21taG84dDY3dWFnbzR5aCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/UVk5yzljef0kGiayL1/giphy.webp" alt="Cute Sloth GIF">
+        <button onclick="nextPage('page2')">Next</button>
+    </div>
+
+    <div id="page2" class="page container" style="display: none;">
+        <p>
+            So I nak cakap terima kasih U untuk 100 hari ada dengan I, layan perangai bodo2 I, 
+            layan kawan-kawan I yang tak betul ni. Dalam 100 hari ni I enjoy sangat buat semua benda dengan U, 
+            and Sorry tau kalau dalam tempoh ni I buat U annoying dengan perangai I yang selalu kacau U and I nak 
+            minta maaf jugak tau kalau I ada buat U terasa dengan sikap I. I harap U maafkan I and bagi tahu kalau I buat 
+            silap. Sorry kalau I layan U tak cukup baik but I have tried my best to treat U.
+        </p>
+        <img class="gif" src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" alt="Cute Cat GIF">
+        <img class="gif" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExcmI1MTEyMXhkNXh6cWljOTE3ajdwa2s0cXdjM3d0aW9neHc2ZmU3diZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/5nkCtCMBc2olMeQGWJ/giphy.webp" alt="Cute Pusheen GIF">
+        <button onclick="nextPage('page3')">Next</button>
+    </div>
+
+    <div id="page3" class="page container" style="display: none;">
+        <h1>Do you want to be my boyfriend until 31 Feb 2200?</h1>
+        <img class="gif" src="https://media.giphy.com/media/l41lFw057lAJQMwg0/giphy.gif" alt="Thinking GIF">
+        <button class="yes-btn" onclick="handleYesButton()">Yes</button>
+        <button class="no-btn" id="noButton" onclick="handleNoButton()">No</button>
+    </div>
+
+    <div id="page4" class="page container" style="display: none;">
+        <h1>Congratulations Hamizan!!!!</h1>
+        <p>Now you are my boyfriend <3</p>
+        <img class="gif bouquet" src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExNzk4aGtubmI5aTRrNWoxMGZocnExYm5jdWdyeHY3cHNwYWU4aXc2NyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/JENzkNiydvTESGaUkI/giphy.webp" alt="Bouquet GIF">
+        <img class="gif" src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHdwMWMyaWZxZnVlNWdrN2o3bjNka2V3aXJ1NGVtcmY4aHM5emx2aCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/lTQF0ODLLjhza/200.webp" alt="Cute Couple GIF">
+    </div>
+
+</body>
+</html>
+
